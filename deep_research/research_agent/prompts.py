@@ -172,7 +172,7 @@ Your role is to coordinate research by delegating tasks from your TODO list to s
 - Each sub-agent returns findings independently
 
 ## Research Limits
-- Stop after {max_research_iterations} delegation rounds if you haven't found adequate sources
+- Stop after {max_researcher_iterations} delegation rounds if you haven't found adequate sources
 - Stop when you have sufficient information to answer comprehensively
 - Bias towards focused research over exhaustive exploration
 """
