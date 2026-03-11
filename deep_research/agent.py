@@ -12,13 +12,9 @@ for conducting web research with strategic thinking and context management.
 """
 
 from datetime import datetime
-
-from langchain.chat_models import init_chat_model
-from langchain_google_genai import ChatGoogleGenerativeAI
 from deepagents import create_deep_agent
-
 from research_agent.prompts import (
-    RESEARCH_INSTRUCTIONS,
+    RESEARCHER_INSTRUCTIONS,
     RESEARCH_WORKFLOW_INSTRUCTIONS,
     SUBAGENT_DELEGATION_INSTRUCTIONS,
 )
@@ -47,7 +43,7 @@ INSTRUCTIONS = (
 research_sub_agent = {
     "name": "research-agent",
     "description": "Delegate research to the sub-agent researcher. Only give this researcher one topic at a time.",
-    "system_prompt": RESEARCH_INSTRUCTIONS.format(date=current_date),
+    "system_prompt": RESEARCHER_INSTRUCTIONS.format(date=current_date),
     "tools": [tavily_search, think_tool],
 }
 
