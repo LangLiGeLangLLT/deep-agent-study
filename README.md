@@ -35,10 +35,10 @@ from langchain_openai import ChatOpenAI
 
 load_dotenv()
 
-llm = ChatOpenAI(
-    model="qwen3-max-2026-01-23",
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+model = ChatOpenAI(
+    model=os.getenv("LLM_MODEL_ID"),
+    api_key=os.getenv("LLM_API_KEY"),
+    base_url=os.getenv("LLM_BASE_URL"),
     temperature=0,
 )
 ```
