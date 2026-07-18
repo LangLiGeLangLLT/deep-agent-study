@@ -7,6 +7,25 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from quick_start.agents.research_agent import agent
 from langchain.messages import AIMessageChunk, ToolMessage
 
+# for chunk in agent.stream(
+#     {"messages": [{"role": "user", "content": "What is langgraph?"}]},
+#     stream_mode="updates",
+#     subgraphs=True,
+#     version="v2",
+# ):
+#     if chunk["type"] == "updates":
+#         # Check if this event came from a subagent
+#         is_subagent = any(segment.startswith("tools:") for segment in chunk["ns"])
+
+#         if is_subagent:
+#             # Extract the tool call ID from the namespace
+#             tool_call_id = next(
+#                 s.split(":")[1] for s in chunk["ns"] if s.startswith("tools:")
+#             )
+#             print(f"Subagent {tool_call_id}: {chunk['data']}")
+#         else:
+#             print(f"Main agent: {chunk['data']}")
+
 for chunk in agent.stream(
     {"messages": [{"role": "user", "content": "What is langgraph?"}]},
     stream_mode="messages",

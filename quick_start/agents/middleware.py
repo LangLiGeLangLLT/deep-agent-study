@@ -43,7 +43,7 @@ class DebugMiddleware(AgentMiddleware):
         request: ToolCallRequest,
         handler: Callable[[ToolCallRequest], ToolMessage | Command],
     ) -> ToolMessage | Command:
-        print(f"\n[Executing tool]: {request.tool_call['name']}")
-        print(f"\n[Arguments]: {request.tool_call['args']}")
+        # print(f"\n[Executing tool]: {request.tool_call['name']}")
+        # print(f"\n[Arguments]: {request.tool_call['args']}")
         result = handler(request)
         return result
