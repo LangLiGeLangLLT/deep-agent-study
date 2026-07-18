@@ -13,12 +13,12 @@ for conducting web research with strategic thinking and context management.
 
 from datetime import datetime
 from deepagents import create_deep_agent
-from research_agent.prompts import (
+from deep_research.research_agent.prompts import (
     RESEARCHER_INSTRUCTIONS,
     RESEARCH_WORKFLOW_INSTRUCTIONS,
     SUBAGENT_DELEGATION_INSTRUCTIONS,
 )
-from research_agent.tools import tavily_search, think_tool
+from deep_research.research_agent.tools import tavily_search, think_tool
 
 # Limits
 max_concurrent_research_units = 3

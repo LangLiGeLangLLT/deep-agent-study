@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from typing import Literal
 from tavily import TavilyClient
 from deepagents import create_deep_agent
+from .middleware import DebugMiddleware
 
 load_dotenv()
 
@@ -46,4 +47,5 @@ agent = create_deep_agent(
     model=model,
     tools=[internet_search],
     system_prompt=research_instructions,
+    middleware=[DebugMiddleware()],
 )
