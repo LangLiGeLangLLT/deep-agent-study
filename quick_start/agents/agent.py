@@ -14,7 +14,6 @@ model = ChatOpenAI(
     temperature=0,
 )
 
-
 tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 
@@ -48,8 +47,3 @@ agent = create_deep_agent(
     tools=[internet_search],
     system_prompt=research_instructions,
 )
-
-result = agent.invoke({"messages": [{"role": "user", "content": "What is langgraph?"}]})
-
-# Print the agent's response
-print(result["messages"][-1].content)
