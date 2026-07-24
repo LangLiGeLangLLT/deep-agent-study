@@ -1,9 +1,3 @@
-import sys
-from pathlib import Path
-
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
 from quick_start.agents.research_agent import agent
 from langchain.messages import AIMessageChunk, ToolMessage
 

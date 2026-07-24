@@ -1,6 +1,4 @@
 ```bash
-
-
 pip freeze > requirements.txt
 
 pip install -r requirements.txt
@@ -41,4 +39,9 @@ model = ChatOpenAI(
     base_url=os.getenv("LLM_BASE_URL"),
     temperature=0,
 )
+```
+
+```bash
+python -m quick_start.tests.test_invoke
+python -m quick_start.tests.test_stream
 ```
