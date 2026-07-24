@@ -17,16 +17,6 @@ uv add langchain-openai
 ```
 
 ```python
-from dotenv import load_dotenv
-
-load_dotenv()
-```
-
-```python
-ChatOpenAI(model="Qwen/Qwen3-8B")
-```
-
-```python
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
