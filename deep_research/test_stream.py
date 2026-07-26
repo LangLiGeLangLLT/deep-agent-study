@@ -1,4 +1,4 @@
-from langchain.messages import HumanMessage
+from langchain.messages import HumanMessage, ToolMessage, AIMessage
 from agent import agent
 
 messages = [HumanMessage(content="What is deepagents?")]
@@ -23,7 +23,11 @@ for chunk in agent.stream(
                     chunk.get("data", {}).get("model", {}).get("messages", [])
                 )
                 for message in model_messages:
-                    if message.content:
+                    if (
+                        isinstance(message, AIMessage)
+                        and message.content
+                        and message.content.strip()
+                    ):
                         print(
                             f"\n=============== Subagent {tool_call_id} model message ===============\n"
                         )
@@ -33,7 +37,11 @@ for chunk in agent.stream(
                     chunk.get("data", {}).get("tools", {}).get("messages", [])
                 )
                 for message in tool_messages:
-                    if message.content:
+                    if (
+                        isinstance(message, ToolMessage)
+                        and message.content
+                        and message.content.strip()
+                    ):
                         print(
                             f"\n=============== Subagent {tool_call_id} tool message ===============\n"
                         )
@@ -44,7 +52,11 @@ for chunk in agent.stream(
                     chunk.get("data", {}).get("model", {}).get("messages", [])
                 )
                 for message in model_messages:
-                    if message.content:
+                    if (
+                        isinstance(message, AIMessage)
+                        and message.content
+                        and message.content.strip()
+                    ):
                         print(
                             f"\n=============== Main agent model message ===============\n"
                         )
@@ -54,7 +66,11 @@ for chunk in agent.stream(
                     chunk.get("data", {}).get("tools", {}).get("messages", [])
                 )
                 for message in tool_messages:
-                    if message.content:
+                    if (
+                        isinstance(message, ToolMessage)
+                        and message.content
+                        and message.content.strip()
+                    ):
                         print(
                             f"\n=============== Main agent tool message ===============\n"
                         )
