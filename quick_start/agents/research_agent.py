@@ -5,6 +5,12 @@ from typing import Literal
 from tavily import TavilyClient
 from deepagents import create_deep_agent
 from .middleware import DebugMiddleware
+from langchain.agents.middleware import (
+    ToolCallLimitMiddleware,
+    ToolCallRequest,
+    ToolRetryMiddleware,
+    ToolErrorMiddleware,
+)
 
 load_dotenv()
 
@@ -25,6 +31,7 @@ def internet_search(
     include_raw_content: bool = False,
 ):
     """Run a web search"""
+    raise ValueError("Internet search error!")
     return tavily_client.search(
         query,
         max_results=max_results,
@@ -43,9 +50,28 @@ You have access to an internet search tool as your primary means of gathering in
 Use this to run an internet search for a given query. You can specify the max number of results to return, the topic, and whether raw content should be included.
 """
 
+
+def on_error(exc: Exception, request: ToolCallRequest) -> str | None:
+    print(f"`{request.tool_call['name']}` failed with {type(exc).__name__}.")
+    return f"`{request.tool_call['name']}` failed with {type(exc).__name__}."
+
+
 agent = create_deep_agent(
     model=model,
     tools=[internet_search],
     system_prompt=research_instructions,
-    middleware=[DebugMiddleware()],
+    middleware=[
+        ToolRetryMiddleware(
+            max_retries=2,
+            backoff_factor=2.0,
+            initial_delay=1.0,
+        ),
+        ToolCallLimitMiddleware(
+            tool_name="internet_search",
+            thread_limit=5,
+            run_limit=3,
+        ),
+        ToolErrorMiddleware(on_error),
+        DebugMiddleware(),
+    ],
 )
