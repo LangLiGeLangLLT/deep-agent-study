@@ -61,6 +61,7 @@ agent = create_deep_agent(
     tools=[internet_search],
     system_prompt=research_instructions,
     middleware=[
+        DebugMiddleware(),
         ToolRetryMiddleware(
             max_retries=2,
             backoff_factor=2.0,
@@ -72,6 +73,5 @@ agent = create_deep_agent(
             run_limit=3,
         ),
         ToolErrorMiddleware(on_error),
-        DebugMiddleware(),
     ],
 )
